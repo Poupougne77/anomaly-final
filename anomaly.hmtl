@@ -1,0 +1,117 @@
+<html>
+<head>
+    <title>ALERTE PIRATAGE</title>
+    <style>
+        body {
+            background-color: black;
+            color: red;
+            text-align: center;
+            font-size: 30px;
+            font-family: Arial, sans-serif;
+            animation: glitch 0.1s infinite alternate;
+        }
+        h1 {
+            font-size: 50px;
+            text-shadow: 5px 5px 10px red;
+            animation: tremblement 0.1s infinite alternate;
+        }
+        @keyframes glitch {
+            from { background-color: black; color: red; }
+            to { background-color: white; color: black; }
+        }
+        @keyframes tremblement {
+            from { transform: translateX(-5px); }
+            to { transform: translateX(5px); }
+        }
+    </style>
+    <script>
+        function afficherAlerte() {
+            alert("⚠️ Téléphone compromis. L'Anomaly vous observe...");
+            setTimeout(afficherAlerte, Math.random() * 5000 + 2000);
+        }
+
+        function allumerCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then((stream) => {
+                    let video = document.createElement("video");
+                    video.srcObject = stream;
+                    video.play();
+                    document.body.appendChild(video);
+                    video.style.position = "absolute";
+                    video.style.top = "10%";
+                    video.style.left = "10%";
+                    video.style.width = "80%";
+                    video.style.filter = "grayscale(100%)"; // Effet noir et blanc
+                })
+                .catch((err) => console.log(err));
+        }
+
+        function clavierQuiBug() {
+            let message = "L'Anomaly est là...";
+            document.addEventListener("keydown", function(event) {
+                event.preventDefault();
+                let input = document.activeElement;
+                if (input.tagName === "INPUT" || input.tagName === "TEXTAREA") {
+                    input.value = message;
+                }
+            });
+        }
+
+        function envoyerMessages() {
+            setInterval(() => {
+                alert("Message de vous-même : \"Pourquoi m'as-tu laissé entrer ?\"");
+            }, Math.random() * 15000 + 5000);
+        }
+
+        function enregistrerVoix() {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then((stream) => {
+                    let recorder = new MediaRecorder(stream);
+                    recorder.start();
+                    setTimeout(() => {
+                        recorder.stop();
+                        let audio = document.createElement("audio");
+                        audio.controls = true;
+                        document.body.appendChild(audio);
+                        recorder.ondataavailable = (event) => {
+                            audio.src = URL.createObjectURL(event.data);
+                            audio.play();
+                        };
+                    }, 5000);
+                })
+                .catch((err) => console.log(err));
+        }
+
+        function ouvrirApplications() {
+            let apps = ["https://www.google.com", "https://www.reddit.com/r/NoSleep/", "https://fr.wikipedia.org/wiki/Paranoïa"];
+            setInterval(() => {
+                let randomApp = apps[Math.floor(Math.random() * apps.length)];
+                window.open(randomApp, "_blank");
+            }, Math.random() * 15000 + 5000);
+        }
+
+        function changerImages() {
+            setInterval(() => {
+                let images = document.getElementsByTagName("img");
+                for (let img of images) {
+                    img.src = "https://i.imgur.com/yXU9JrQ.png"; // Image flippante
+                }
+            }, 10000);
+        }
+
+        window.onload = function() {
+            setTimeout(afficherAlerte, 2000);
+            setTimeout(allumerCamera, 3000);
+            setTimeout(clavierQuiBug, 4000);
+            setTimeout(envoyerMessages, 6000);
+            setTimeout(enregistrerVoix, 8000);
+            setTimeout(ouvrirApplications, 10000);
+            setTimeout(changerImages, 12000);
+        };
+    </script>
+</head>
+<body>
+    <h1>💀 L'ANOMALY A PRIS POSSESSION DE VOTRE TÉLÉPHONE 💀</h1>
+    <p>Vous ne pouvez plus fuir...</p>
+</body>
+</html>
